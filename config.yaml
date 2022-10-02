@@ -1,0 +1,10 @@
+server:
+  host: 127.0.0.1
+  port: 8080
+  secret_key: "secret"
+mysql:
+  host: localhost
+  port: 3306
+  password: bangadam
+  user: root
+  database: "backend_test_majoo"

@@ -1,0 +1,182 @@
+basePath: /api/v1
+definitions:
+  domain.LoginRequest:
+    properties:
+      password:
+        example: admin1
+        type: string
+      username:
+        example: admin1
+        type: string
+    type: object
+  response.AppError:
+    properties:
+      message:
+        description: Message is the error message that may be displayed to end users
+        type: string
+      meta:
+        description: Meta is the error detail detail data
+    type: object
+  response.AppSuccess:
+    properties:
+      data: {}
+      meta: {}
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: API documentaion of Backend Test Majoo
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: API documentaion of Backend Test Majoo
+  version: "1.0"
+paths:
+  /login:
+    post:
+      consumes:
+      - application/json
+      description: API for login and get token
+      parameters:
+      - description: Login Account
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/domain.LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.AppSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.AppError'
+      summary: Login
+      tags:
+      - Auth
+  /report-transaction-merchant:
+    get:
+      consumes:
+      - application/json
+      description: API for get report transaction merchant
+      parameters:
+      - description: page filter
+        in: query
+        name: page
+        type: integer
+      - description: data limit filter
+        in: query
+        name: limit
+        type: integer
+      - description: start date filter
+        in: query
+        name: start_date
+        type: string
+      - description: end date filter
+        in: query
+        name: end_date
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.AppSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.AppError'
+      security:
+      - ApiKeyAuth: []
+      summary: Report Transaction Merchant
+      tags:
+      - Report
+  /report-transaction-outlet/:outlet_id:
+    get:
+      consumes:
+      - application/json
+      description: API for get report transaction merchant
+      parameters:
+      - description: page filter
+        in: query
+        name: page
+        type: integer
+      - description: data limit filter
+        in: query
+        name: limit
+        type: integer
+      - description: start date filter
+        in: query
+        name: start_date
+        type: string
+      - description: end date filter
+        in: query
+        name: end_date
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.AppSuccess'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "422":
+          description: Unprocessable Entity
+          schema:
+            $ref: '#/definitions/response.AppError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/response.AppError'
+      security:
+      - ApiKeyAuth: []
+      summary: Report Transaction Outlet
+      tags:
+      - Report
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
